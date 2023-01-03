@@ -44,7 +44,6 @@ for i in newjobid:
     data = bs(r.text, 'html.parser')
     result.append(data)
 
-
 # find所需的資料
 for i in result:
     try:
@@ -142,16 +141,13 @@ for i in result:
                 'edu':edu,
                 'dep':dep,
                 'skill':skill,
-                'attached':attached}       
-                    
-        final.append(job)
-        
+                'attached':attached}                    
+        final.append(job) 
     except:
         print(newid) #toplink找不到頁面
         continue
-
-
-###
+        
+#####
 # 匯入至資料庫
 con = pymysql.connect(host= "",
                           port= ,
@@ -177,7 +173,7 @@ if con.open:
                 `lastupdate` date,
                 `website` varchar(10));'''        
     cur.execute(sql)
-
+    
     try:
         for i in range(len(final)):
             sql='''
@@ -185,12 +181,10 @@ if con.open:
                 VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','1111') on duplicate key update jobname=values(jobname),company=values(company),city=values(city),dist=values(dist),salary=values(salary),education=values(education),department=values(department),skill=values(skill),attached=values(attached),lastupdate=values(lastupdate),website=values(website);
                 '''.format(final[i]['id'], final[i]['jobname'], final[i]['company'], final[i]['city'], final[i]['dist'], final[i]['salary'], final[i]['edu'], final[i]['dep'], final[i]['skill'], final[i]['attached'],final[i]['update'])
             cur.execute(sql)    
-        print('Values inserted successfully.\n')
-                
+        print('Values inserted successfully.\n')               
     except Exception as m:
         print('Something went wrong:', m, '\n')
-        print(final[i]['id'], final[i]['jobname'],'\n')
-
+        print(final[i]['id'], final[i]['jobname'],'\n') 
 else:
     print('Connection failed.')
 
