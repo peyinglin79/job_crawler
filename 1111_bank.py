@@ -144,7 +144,7 @@ for i in result:
                 'attached':attached}                    
         final.append(job) 
     except:
-        print(newid) #toplink找不到頁面
+        print(newid) # toplink找不到頁面
         continue
         
 #####
